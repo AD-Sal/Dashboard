@@ -26,6 +26,7 @@ class HomeController extends Controller
         $wordlist = Wordlist::where('id', '<=', $correctedComparisons)->get();
         $wordCount = $wordlist->count();
         return view('home',['wordCount'=>$wordCount]);
+        
     }
 
 }

@@ -1,3 +1,4 @@
+
 @extends('adminlte::page')
 @section('title', __('Bienvenido a nuestro sitio'))
 @section('content')
@@ -13,7 +14,7 @@
             <th>PRECIO:</th>
         </thead>
         <tbody>
-            @foreach($productos as $director)
+            @foreach($economico as $director)
             <tr>
                 <td>{{$director->id}}</td>
                 <td>{{$director->pel_nombre}}</td>

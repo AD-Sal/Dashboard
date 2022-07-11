@@ -137,7 +137,7 @@ $datosVentas = [$enero, $febrero, $marzo, $abril, $mayo]*/
           <div class="card-tools">
           <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                      <a class="btn btn-default"  href="" >Reporte</a>
+                      <a class="btn btn-default"  href="/economico" >Reporte</a>
                     
 
 
@@ -337,7 +337,8 @@ $datosVentas = [$enero, $febrero, $marzo, $abril, $mayo]*/
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-chart-pie mr-1"></i>
-            Peliculas con mayor demanda
+            Peliculas de estreno:
+            Para cada mes
           </h3>
           <div class="card-tools">
 
@@ -436,43 +437,66 @@ $datosVentas = [$enero, $febrero, $marzo, $abril, $mayo]*/
 </script>
 
 <script>
-  const cData2 = JSON.parse(`<?php echo $data; ?>`);
-  console.log(cData2);
-  const ctx2 = document.getElementById('red').getContext('2d');
-  const areaChart2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: cData2.label,
-      datasets: [{
-        label: 'Cantidad de Ingresos:',
-        data: cData2.data,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+const salesGraphChartCanvas3 = document.getElementById('red').getContext('2d');
+
+
+
+var salesGraphChartData3 = {
+  labels: ['Increible','Amor','Anime','Chistes','Drama','Comedia','Drama','Fantasia','Accion','Terror'],
+  datasets: [
+    {
+      label: 'Pedidos',
+      fill: false,
+      borderWidth: 2,
+      lineTension: 0,
+      spanGaps: true,
+      borderColor: '#72C02C',
+      pointRadius: 3,
+      pointHoverRadius: 7,
+      pointColor: '#green',
+      pointBackgroundColor: '#green',
+      data: {{$spm['data']}} 
     }
-  });
+  ]
+}
+
+var salesGraphChartOptions3 = {
+  maintainAspectRatio: false,
+  responsive: true,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [{
+      ticks: {
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: false,
+        color: '#000000',
+        drawBorder: false
+      }
+    }],
+    yAxes: [{
+      ticks: {
+        stepSize: 4,
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: true,
+        color: '#000000',
+        drawBorder: false
+      }
+    }]
+  }
+}
+
+
+var salesGraphChart3 = new Chart(salesGraphChartCanvas3, { // lgtm[js/unused-local-variable]
+  type: 'line',
+  data: salesGraphChartData3,
+  options: salesGraphChartOptions3
+});
 </script>
 
 
@@ -610,17 +634,15 @@ $datosVentas = [$enero, $febrero, $marzo, $abril, $mayo]*/
 
 <!---------Tabla 6---------------------->
 <script>
-const cData6 = JSON.parse(`<?php echo $data; ?>`);
-  console.log(cData6);
-  const ctx6 = document.getElementById('sexto').getContext('2d');
-  const areaChart6= new Chart(ctx6, {
-    type: 'bar',
-    data: {
-      labels: cData6.label,
-      datasets: [{
-        label: 'Cantidad de Ingresos:',
-        data: cData6.data,
-        backgroundColor: [
+const alq_chart1 = document.getElementById('sexto').getContext('2d');
+
+var peliculaData1 = {
+  labels: ['Masculino','Femenino'],
+  datasets: [
+    {
+      label: 'Sexo:',
+      fill: true,
+      backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
           'rgba(255, 206, 86, 0.2)',
@@ -635,18 +657,59 @@ const cData6 = JSON.parse(`<?php echo $data; ?>`);
           'rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+        ], 
+      fillColor: '#99C4C8',
+      borderWidth: 8,
+      lineTension: 0.8,
+      spanGaps: true,
+      borderColor: '#F1C40F',
+      pointRadius: 8,
+      pointHoverRadius: 10,
+      pointColor: '#18978F',
+      pointBackgroundColor: '#18978F',
+      data: {{$lista['data']}} 
     }
-  });
+  ]
+}
+
+var alquilerGraphChartOptions1 = {
+  maintainAspectRatio: false,
+  responsive: true,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [{
+      ticks: {
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: false,
+        color: '#000000',
+        drawBorder: false
+      }
+    }],
+    yAxes: [{
+      ticks: {
+        stepSize: 1,
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: true,
+        color: '#000000',
+        drawBorder: false
+        
+      },
+      
+    }]
+  }
+}
+
+const alquilerChart1 = new Chart(alq_chart1, {
+  type: 'pie',
+  data: peliculaData1,
+  options: alquilerGraphChartOptions1
+});
 </script>
 
 <!---------Tabla 7---------------------->
@@ -741,102 +804,137 @@ const cData6 = JSON.parse(`<?php echo $data; ?>`);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
 <script>
-  const cData9 = JSON.parse(`<?php echo $data; ?>`);
-  console.log(cData9);
-  const ctx9 = document.getElementById('noveno').getContext('2d');
-  const areaChart9 = new Chart(ctx9, {
+
+const salesGraphChartCanvas = document.getElementById('noveno').getContext('2d');
 
 
-    type: "pie",
-    data: {
-      labels: cData9.label,
-      datasets: [{
-        label: 'Num datos',
-        data: cData9.data,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
 
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+  var salesGraphChartData = {
+    labels: ['Increible','Amor','Anime','Chistes','Drama','Comedia','Drama','Fantasia','Accion','Terror'],
+    datasets: [
+      {
+        label: 'Pedidos',
+        fill: false,
+        borderWidth: 2,
+        lineTension: 0,
+        spanGaps: true,
+        borderColor: '#72C02C',
+        pointRadius: 3,
+        pointHoverRadius: 7,
+        pointColor: '#green',
+        pointBackgroundColor: '#green',
+        data: {{$spm['data']}} 
       }
+    ]
+  }
+
+  var salesGraphChartOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontColor: '#000000'
+        },
+        gridLines: {
+          display: false,
+          color: '#000000',
+          drawBorder: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          stepSize: 4,
+          fontColor: '#000000'
+        },
+        gridLines: {
+          display: true,
+          color: '#000000',
+          drawBorder: false
+        }
+      }]
     }
-  });
+  }
+
+
+  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'line',
+    data: salesGraphChartData,
+    options: salesGraphChartOptions
+  })
+
 </script>
 
 
 <!---------Tabla 10---------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
+
+
 <script>
-var userData = <?php echo json_encode($data)?>;
-    Highcharts.chart('decimo', {
-        title: {
-            text: 'New User 2021'
-        },
-        subtitle: {
-            text: 'Bluebird youtube channel'
-        },
-        xAxis: {
-            categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                'October', 'November', 'December'
-            ]
-        },
-        yAxis: {
-            title: {
-                text: 'Number of New Users'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-        plotOptions: {
-            series: {
-                allowPointSelect: true
-            }
-        },
-        series: [{
-            name: 'New Users',
-            data: userData
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
-    });
+const alq_chart = document.getElementById('decimo').getContext('2d');
+
+var peliculaData = {
+  labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre','Diciembre'],
+  datasets: [
+    {
+      label: 'Lista de directores:',
+      fill: true,
+      fillColor: '#99C4C8',
+      borderWidth: 8,
+      lineTension: 0.8,
+      spanGaps: true,
+      borderColor: '#99C4C8',
+      pointRadius: 8,
+      pointHoverRadius: 10,
+      pointColor: '#18978F',
+      pointBackgroundColor: '#18978F',
+      data: {{$peli['data']}} 
+    }
+  ]
+}
+
+var alquilerGraphChartOptions = {
+  maintainAspectRatio: false,
+  responsive: true,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [{
+      ticks: {
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: false,
+        color: '#000000',
+        drawBorder: false
+      }
+    }],
+    yAxes: [{
+      ticks: {
+        stepSize: 1,
+        fontColor: '#000000'
+      },
+      gridLines: {
+        display: true,
+        color: '#000000',
+        drawBorder: false
+        
+      },
+      
+    }]
+  }
+}
+
+const alquilerChart = new Chart(alq_chart, {
+  type: 'bar',
+  data: peliculaData,
+  options: alquilerGraphChartOptions
+});
 
 </script>
 

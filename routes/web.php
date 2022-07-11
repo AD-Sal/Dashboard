@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 
 
-
-Route::get('/','App\Http\Controllers\RelacionController@web');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,10 +44,15 @@ Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'ind
 	Route::view('actor', 'livewire.actors.index')->middleware('auth');
 	Route::view('sexo', 'livewire.sexos.index')->middleware('auth');
 	Route::view('user','profile.show')->middleware('auth');
-
-	Route::view('report','livewire.Reporte.index')->middleware('auth');
-
-
+	Route::view('reporte-top','livewire.reporte-top.index')->middleware('auth');
+	Route::get('reporte-top/pdf',[App\Http\Livewire\ReportTop::class,'pdf'])->middleware('auth');
+	Route::view('reporte-alquiler','livewire.reporte-alquiler.index')->middleware('auth');
+	Route::view('reporte-genero','livewire.reporte-genero.index')->middleware('auth');
+	Route::view('reporte-ingreso','livewire.reporte-ingreso.index')->middleware('auth');
+	Route::view('reporte-socio','livewire.reporte-socio.index')->middleware('auth');
+	Route::get('/pdf-top',[App\Http\Livewire\ReportTop::class,'pdf'])->name('descargarPDF-Top');
+	Route::get('/pdf-alq',[App\Http\Livewire\ReportAlquiler::class,'pdf'])->name('descargarPDF-Alq');
+	Route::get('/pdf-gen',[App\Http\Livewire\ReportGenero::class,'pdf'])->name('descargarPDF-Gen');
 
 	/** Routes AdminLTE */
 	Route::get('/admin/login', [AuthController::class, 'getLogin'])->name('getLogin');
@@ -57,7 +60,5 @@ Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'ind
 		return view('livewire.directors.index');
 	})->name('Director');
 
-	Route::get('report/pdf', function(){
-		return view('welcome');
-	});
-
+	Route::get('report','App\Http\Controllers\RelacionController@red');
+	Route::get('economico','App\Http\Controllers\RelacionController@alquila');

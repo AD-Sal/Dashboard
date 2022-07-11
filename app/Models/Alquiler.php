@@ -21,6 +21,7 @@ class Alquiler extends Model
     public function pelicula()
     {
         return $this->hasOne('App\Models\Pelicula', 'id', 'pel_id');
+        return  $this->belongsTo(Pelicula::class,'pel_nombre');
     }
     
     /**
